@@ -1,0 +1,44 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background1 {
+    background-image: url('https://www.animalbehaviorcollege.com/wp-content/uploads/2015/02/west-highland-white-terrier-grooming.jpg');
+}
+
+.background2 {
+    background-image: url('https://images.fineartamerica.com/images-medium-5/westie-and-scottie-dogs-john-daniels.jpg');
+}
+
+.center-message {
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.black {
+    font-size: 1em;
+    height: 60vh;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    padding: 150px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
