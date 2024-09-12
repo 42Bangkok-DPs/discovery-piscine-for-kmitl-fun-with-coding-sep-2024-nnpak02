@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="backgroound.css">
+    <title>Document</title>
+</head>
+<style>
+    .cal {
+        top: 50%;
+        left: 50%;
+        padding: 25px;
+        border: 2px black solid;
+        border-radius: 10px;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        box-sizing: content-box;
+    }
+    .input {
+        border: 2px gray solid;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <div class="cal">
+        <input id="first"placeholder="Enter first number" class="input">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="second" placeholder="Enter second number" class="input">
+        <input type="button" value="Try Me!" onclick="cal()">
+    </div>
+</body>
+
+<script>
+    function cal() {
+        const first = parseFloat(document.getElementById('first').value);
+        const second = parseFloat(document.getElementById('second').value);
+        const operator = document.getElementById('operator').value;
+        let result = 0;
+
+        console.log(second);
+
+        if (isNaN(first) || isNaN(second) || first < 0 || second < 0) {
+            alert("Error :( ");
+            return;
+        }
+        switch (operator) {
+            case "+":
+                result = first + second;
+                alert("The Answer is : " + result);
+                console.log("The Answer is : " + result);
+                break;
+            case "-":
+                result = first - second;
+                alert("The Answer is : " + result);
+                console.log("The Answer is : " + result);
+                break;
+            case "*":
+                result = first * second;
+                alert("The Answer is : " + result);
+                console.log("The Answer is : " + result);
+                break;
+            case "/":
+            if (second == 0) {
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                    break;
+                }
+                else {
+                    result = first / second
+                    alert("The Answer is : " + result);
+                    console.log("The Answer is : " + result);
+                    break;
+                }
+                break;
+            case "%":
+                if (second == 0) {
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                    break;
+                }
+                else {
+                    result = first % second
+                    alert("The Answer is : " + result);
+                    console.log("The Answer is : " + result);
+                    break;
+                } 
+                break;
+        }
+        
+        setInterval(() => {
+            alert('Please, use me...');
+        }, 30000);
+    }
+</script>
