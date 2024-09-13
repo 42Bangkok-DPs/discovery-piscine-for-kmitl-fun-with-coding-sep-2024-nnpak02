@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .box {
+        display: flex;
+        border: 1px;
+        justify-content: center;
+        height: 30px;
+    }
+
+    .input {
+        border: 2px gray solid;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+</style>
+<body>
+    <div class="box">
+        <input id="leftNumber" placeholder="Input first number" class="input">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="rightNumber" placeholder="Input Seccond number" class="input">
+        <input type="button" value="Try me" onclick="cal()">
+    </div>
+    <script>
+        function cal(){
+            const leftNumber = parseFloat(document.getElementById('leftNumber').value);
+            const rightNumber = parseFloat(document.getElementById('rightNumber').value);
+            const operator = document.getElementById('operator').value;
+
+            // ตรวจสอบว่าค่าที่กรอกเป็นตัวเลขและเป็นจำนวนเต็มเท่านั้น
+            if (isNaN(leftNumber) || isNaN(rightNumber) || leftNumber < 0 || rightNumber < 0 || !Number.isInteger(leftNumber) || !Number.isInteger(rightNumber)) {
+                alert("Error :(");
+                return;
+            }
+
+            switch(operator){
+                case "+":
+                    result = leftNumber + rightNumber;
+                    alert("The answer is: " + result);
+                    break;
+                case "-":
+                    result = leftNumber - rightNumber;
+                    alert("The answer is: " + result);
+                    break;
+                case "*":
+                    result = leftNumber * rightNumber;
+                    alert("The answer is: " + result);
+                    break;
+                case "/":
+                    if (rightNumber == 0){
+                        alert("It's over 9000! (Division by zero)");
+                        break;
+                    } else {
+                        result = leftNumber / rightNumber;
+                        alert("The answer is: " + result);
+                        break;
+                    }
+                case "%":
+                    if (rightNumber == 0) {
+                        alert("It's over 9000! (Division by zero)");
+                        break;
+                    } else {
+                        result = leftNumber % rightNumber;
+                        alert("The Answer is: " + result);
+                        break;
+                    }
+            }
+
+            // แจ้งเตือนทุกๆ 30 วินาที
+            setInterval(() => {
+                alert('Please, use me...');
+            }, 30000);
+        }
+    </script>
+</body>
+</html>
