@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Balloon</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+  
+        .balloon {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="balloon" id="balloon"></div>
+    <script>
+        $(document).ready(function() {
+            const $balloon = $('.balloon');
+            const rgb = ['red', 'green', 'blue'];
+            let i = 0; // เริ่มต้นที่สีแรก
+            let size = 200;
+
+            $balloon.on('click', function() {
+                size += 10;
+                if (size > 420) {
+                    size = 200;
+                }
+                $balloon.css({
+                    width: `${size}px`,  
+                    height: `${size}px`, 
+                    backgroundColor: rgb[i]
+                });
+                i = (i + 1) % rgb.length; 
+            });
+
+            $balloon.on('mouseleave', function() {
+                if (size > 200) {
+                    size -= 5;
+                    $balloon.css({
+                        width: `${size}px`,  
+                        height: `${size}px`, 
+                        backgroundColor: rgb[i]
+                    });
+                }
+                i = (i - 1 + rgb.length) % rgb.length; 
+            });
+        });
+    </script>
+</body>
+</html>
