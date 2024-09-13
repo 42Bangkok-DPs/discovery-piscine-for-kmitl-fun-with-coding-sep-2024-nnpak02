@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #ft_list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #afafaf;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        span{
+            margin: 10px;
+        }
+        #newBtn {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+  <div class="task">
+    <h1>todo list</h1>
+    <div id="ft_list">
+    </div>
+    <span>
+        <button id="New">New</button>
+      </span>
+  </div>
+  <script src="todo.js"></script>
+</body>
+</html>
