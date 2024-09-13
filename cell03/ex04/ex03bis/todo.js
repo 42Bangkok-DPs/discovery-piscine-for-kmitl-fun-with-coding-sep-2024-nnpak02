@@ -1,50 +1,70 @@
-let numbering = 0;
+$(document).ready(function () {
+    let list = [];
+    const toDoEl = $("#ft_list");
+    const addBtn = $("#addBtn");
 
-$('#New').click(function() {
-  const name = prompt("Please enter your list:", "");
-  if (name == null || name.trim() === '') {
-    alert("Invalid input");
-    return;
-  }
-  numbering++;
-  setCookie(numbering.toString(), name, 365);  
-  appending(name);
-});
+    function render() {
+        toDoEl.empty();
+        $.each(list, function (index, value) {
+            const toDoItem = createTodoElement(value);
+            toDoItem.on("click", function () {
+                removeTodo(index);
+            });
+            toDoEl.append(toDoItem);
+        });
+    };
 
-function appending(name) {
-  const todo_div = $('<div></div>')
-      .text(name)
-      .attr('id', numbering)
-      .attr('class', "todo-item");
-  $('#ft_list').prepend(todo_div);
-}
+    function createTodoElement(value) {
+        const button = $("<button>").addClass("todo-item").text(value);
+        return button;
+    };
 
-function setCookie(cname, cvalue, exdays) {
-  const expDate = new Date();
-  expDate.setTime(expDate.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  document.cookie = `${cname}=${encodeURIComponent(cvalue)}; expires=${expDate.toUTCString()}; path=/`;
-}
+    function addTodo(value) {
+        // Add the new item to the beginning of the list
+        list.unshift(value);
+        updateCookie(JSON.stringify(list));
+        render();
+    };
 
-function deleteCookie(name) {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-}
+    function removeTodo(index) {
+        if (!confirm("Delete?")) return;
+        list.splice(index, 1);
+        updateCookie(JSON.stringify(list));
+        render();
+    };
 
-$('#ft_list').on('click', '.todo-item', function() {
-  if (confirm("Do you want to delete?")) {
-    deleteCookie(this.id);
-    $(this).remove();
-    numbering--;
-  }
-});
+    function updateCookie(value) {
+        setCookie("toDo", value);
+    };
 
-$(window).on("load", function() {
-  numbering = 0;
-  const cookies = document.cookie.split('; ').filter(row => row.includes('='));
-  cookies.forEach(cookie => {
-    const [key, value] = cookie.split('=');
-    if (key && value) {
-      numbering++;
-      appending(decodeURIComponent(value));
+    function setCookie(key, value) {
+        document.cookie = `${key}=${encodeURIComponent(value)};`;
+    };
+
+    function getCookie(key) {
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.startsWith(key + "=")) {
+                return decodeURIComponent(cookie.substring(key.length + 1));
+            }
+        }
+
+        return null;
+    };
+
+    addBtn.on("click", function () {
+        const newTodo = prompt("New ToDo");
+        if (newTodo.trim().length <= 0) return;
+        addTodo(newTodo);
+    });
+
+    const oldToDo = getCookie("toDo");
+    if (oldToDo) {
+        list = JSON.parse(decodeURIComponent(oldToDo));
     }
-  });
+
+    render();
 });
